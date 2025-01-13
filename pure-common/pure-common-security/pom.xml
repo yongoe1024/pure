@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yongoe</groupId>
+        <artifactId>pure-common</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>pure-common-security</artifactId>
+    <description>需要数据权限、接口访问权限、用户登录信息，可以引入此模块</description>
+    <!--  数据权限注解、satoken基础拦截器、用户工具类-->
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yongoe</groupId>
+            <artifactId>pure-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yongoe</groupId>
+            <artifactId>pure-system-api</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

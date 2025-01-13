@@ -1,0 +1,14 @@
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, ${menuParentId}, '${comment}', '${table.moduleName}:${table.businessName}:query', '${table.businessName}' , ${component}, NULL, '0', '0', '1' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');
+-- 按钮父菜单ID
+set @parentId = @@identity;
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, @parentId}, '添加-${comment}', '${table.moduleName}:${table.businessName}:add', '${table.businessName}' , ${component}, NULL, '0', '0', '1' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, @parentId, '修改-${comment}', '${table.moduleName}:${table.businessName}:update', NULL , NULL, NULL, '0', '0', '2' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, @parentId}, '删除-${comment}', '${table.moduleName}:${table.businessName}:delete', NULL , NULL, NULL, '0', '0', '2' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, @parentId, '导入-${comment}', '${table.moduleName}:${table.businessName}:upload', NULL , NULL, NULL, '0', '0', '2' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');
+INSERT INTO `sys_menu` (`menu_id`, `parent_id`, `name`, `permission`, `path` , `component`, `query`, `is_frame`, `keep_alive`, `menu_type` , `visible`, `status`, `icon`, `order_num`, `remark` , `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`)
+                VALUES (null, @parentId}, '导出-${comment}', '${table.moduleName}:${table.businessName}:export', NULL , NULL, NULL, '0', '0', '2' , '1', '1', NULL, '0', NULL , NULL, NOW(), NULL, NOW(), '0');

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.gen.mapper.GenTableMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.gen.entity.GenTable">
+        select *
+        from gen_table
+        <where>
+            del_flag = '0'
+            <if test="null != genTable.tableId">
+                and table_id = #{genTable.tableId}
+            </if>
+            <if test="null != genTable.tableName and ''!=genTable.tableName">
+                and table_name LIKE CONCAT('%',#{genTable.tableName  },'%')
+            </if>
+            <if test="null != genTable.tableComment and ''!=genTable.tableComment">
+                and table_comment LIKE CONCAT('%',#{genTable.tableComment  },'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

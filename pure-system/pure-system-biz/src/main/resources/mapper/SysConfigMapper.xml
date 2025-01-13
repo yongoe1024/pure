@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysConfigMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysConfigVo">
+        select *
+        from sys_config
+        <where>
+            del_flag ='0'
+            <if test="null != sysConfig.configId">
+                and config_id = #{sysConfig.configId}
+            </if>
+            <if test="null != sysConfig.configName and ''!=sysConfig.configName">
+                and config_name LIKE CONCAT('%',#{sysConfig.configName  },'%')
+            </if>
+            <if test="null != sysConfig.configKey and ''!=sysConfig.configKey">
+                and config_key LIKE CONCAT('%',#{sysConfig.configKey  },'%')
+            </if>
+            <if test="null != sysConfig.configValue and ''!=sysConfig.configValue">
+                and config_value LIKE CONCAT('%',#{sysConfig.configValue  },'%')
+            </if>
+            <if test="null != sysConfig.configType and ''!=sysConfig.configType">
+                and config_type LIKE CONCAT('%',#{sysConfig.configType  },'%')
+            </if>
+            <if test="null != sysConfig.remark and ''!=sysConfig.remark">
+                and remark LIKE CONCAT('%',#{sysConfig.remark  },'%')
+            </if>
+            <if test="null != sysConfig.delFlag and ''!=sysConfig.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysConfig.delFlag  },'%')
+            </if>
+            <if test="null != sysConfig.createBy and ''!=sysConfig.createBy">
+                and create_by LIKE CONCAT('%',#{sysConfig.createBy  },'%')
+            </if>
+            <if test="null != sysConfig.createTime">
+                and create_time = #{sysConfig.createTime}
+            </if>
+            <if test="null != sysConfig.updateBy and ''!=sysConfig.updateBy">
+                and update_by LIKE CONCAT('%',#{sysConfig.updateBy  },'%')
+            </if>
+            <if test="null != sysConfig.updateTime">
+                and update_time = #{sysConfig.updateTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

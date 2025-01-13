@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysLogMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysLogVo">
+        select *
+        from sys_log
+        <where>
+            del_flag ='0'
+            <if test="null != sysLog.id">
+                and id = #{sysLog.id}
+            </if>
+            <if test="null != sysLog.logType and ''!=sysLog.logType">
+                and log_type LIKE CONCAT('%',#{sysLog.logType  },'%')
+            </if>
+            <if test="null != sysLog.title and ''!=sysLog.title">
+                and title LIKE CONCAT('%',#{sysLog.title  },'%')
+            </if>
+            <if test="null != sysLog.ip and ''!=sysLog.ip">
+                and ip LIKE CONCAT('%',#{sysLog.ip  },'%')
+            </if>
+            <if test="null != sysLog.os and ''!=sysLog.os">
+                and os LIKE CONCAT('%',#{sysLog.os  },'%')
+            </if>
+            <if test="null != sysLog.method and ''!=sysLog.method">
+                and method LIKE CONCAT('%',#{sysLog.method  },'%')
+            </if>
+            <if test="null != sysLog.params and ''!=sysLog.params">
+                and params LIKE CONCAT('%',#{sysLog.params  },'%')
+            </if>
+            <if test="null != sysLog.time">
+                and time = #{sysLog.time}
+            </if>
+            <if test="null != sysLog.exception and ''!=sysLog.exception">
+                and exception LIKE CONCAT('%',#{sysLog.exception  },'%')
+            </if>
+            <if test="null != sysLog.delFlag and ''!=sysLog.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysLog.delFlag  },'%')
+            </if>
+            <if test="null != sysLog.createBy and ''!=sysLog.createBy">
+                and create_by LIKE CONCAT('%',#{sysLog.createBy  },'%')
+            </if>
+            <if test="null != sysLog.createTime">
+                and create_time = #{sysLog.createTime}
+            </if>
+            <if test="null != sysLog.updateBy and ''!=sysLog.updateBy">
+                and update_by LIKE CONCAT('%',#{sysLog.updateBy  },'%')
+            </if>
+            <if test="null != sysLog.updateTime">
+                and update_time = #{sysLog.updateTime}
+            </if>
+        </where>
+        order by id desc
+    </select>
+
+</mapper>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysRoleMapper">
+
+    <!--通用查询映射结果-->
+    <resultMap id="BaseResultMap" type="com.yongoe.pure.system.api.vo.SysRoleVo">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_code" property="roleCode"/>
+        <result column="data_scope" property="dataScope"/>
+        <result column="remark" property="remark"/>
+        <collection property="menuIds"
+                    select="selectMenuIdByRoleId"
+                    column="role_id">
+        </collection>
+        <collection property="deptIds"
+                    select="selectDeptIdByRoleId"
+                    column="role_id">
+        </collection>
+        <collection property="permissions"
+                    select="selectPermissionsByRoleId"
+                    column="role_id">
+        </collection>
+    </resultMap>
+
+    <!--    获取角色菜单id-->
+    <select id="selectMenuIdByRoleId" resultType="java.lang.Long">
+        select menu_id
+        from sys_role_menu
+        <where>
+            role_id = #{roleId}
+        </where>
+    </select>
+
+    <!--    获取角色权限字符-->
+    <select id="selectPermissionsByRoleId" resultType="java.lang.String">
+        SELECT sys_menu.permission
+        FROM sys_role_menu
+        LEFT JOIN sys_menu
+        ON sys_role_menu.menu_id = sys_menu.menu_id and sys_menu.del_flag ='0'
+        <where>
+            sys_role_menu.role_id = #{roleId}
+            AND sys_menu.status = '1'
+        </where>
+    </select>
+
+
+    <!--    获取角色的部门-数据权限-->
+    <select id="selectDeptIdByRoleId" resultType="java.lang.Long">
+        select dept_id
+        from sys_role_dept
+        <where>
+            and role_id = #{roleId}
+        </where>
+    </select>
+
+    <!--    用过userId获取角色信息-->
+    <select id="selectRoleByUserId" resultMap="BaseResultMap">
+        select *
+        from sys_user_role
+        left join sys_role
+        on sys_user_role.role_id = sys_role.role_id and sys_role.del_flag ='0'
+        <where>
+            and sys_user_role.user_id = #{userId}
+        </where>
+    </select>
+
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysRoleVo">
+        select *
+        from sys_role
+        <where>
+            del_flag ='0'
+            <if test="null != sysRole.roleId">
+                and role_id = #{sysRole.roleId}
+            </if>
+            <if test="null != sysRole.roleName and ''!=sysRole.roleName">
+                and role_name LIKE CONCAT('%',#{sysRole.roleName  },'%')
+            </if>
+            <if test="null != sysRole.roleCode and ''!=sysRole.roleCode">
+                and role_code LIKE CONCAT('%',#{sysRole.roleCode  },'%')
+            </if>
+            <if test="null != sysRole.dataScope and ''!=sysRole.dataScope">
+                and data_scope LIKE CONCAT('%',#{sysRole.dataScope  },'%')
+            </if>
+            <if test="null != sysRole.remark and ''!=sysRole.remark">
+                and remark LIKE CONCAT('%',#{sysRole.remark  },'%')
+            </if>
+            <if test="null != sysRole.delFlag and ''!=sysRole.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysRole.delFlag  },'%')
+            </if>
+            <if test="null != sysRole.createBy and ''!=sysRole.createBy">
+                and create_by LIKE CONCAT('%',#{sysRole.createBy  },'%')
+            </if>
+            <if test="null != sysRole.createTime">
+                and create_time = #{sysRole.createTime}
+            </if>
+            <if test="null != sysRole.updateBy and ''!=sysRole.updateBy">
+                and update_by LIKE CONCAT('%',#{sysRole.updateBy  },'%')
+            </if>
+            <if test="null != sysRole.updateTime">
+                and update_time = #{sysRole.updateTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

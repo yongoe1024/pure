@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysDictMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysDictVo">
+        select *
+        from sys_dict
+        <where>
+            del_flag ='0'
+            <if test="null != sysDict.dictId">
+                and dict_id = #{sysDict.dictId}
+            </if>
+            <if test="null != sysDict.dictName and ''!=sysDict.dictName">
+                and dict_name LIKE CONCAT('%',#{sysDict.dictName  },'%')
+            </if>
+            <if test="null != sysDict.dictCode and ''!=sysDict.dictCode">
+                and dict_code LIKE CONCAT('%',#{sysDict.dictCode  },'%')
+            </if>
+            <if test="null != sysDict.remark and ''!=sysDict.remark">
+                and remark LIKE CONCAT('%',#{sysDict.remark  },'%')
+            </if>
+            <if test="null != sysDict.delFlag and ''!=sysDict.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysDict.delFlag  },'%')
+            </if>
+            <if test="null != sysDict.createBy and ''!=sysDict.createBy">
+                and create_by LIKE CONCAT('%',#{sysDict.createBy  },'%')
+            </if>
+            <if test="null != sysDict.createTime">
+                and create_time = #{sysDict.createTime}
+            </if>
+            <if test="null != sysDict.updateBy and ''!=sysDict.updateBy">
+                and update_by LIKE CONCAT('%',#{sysDict.updateBy  },'%')
+            </if>
+            <if test="null != sysDict.updateTime">
+                and update_time = #{sysDict.updateTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getItemByCode" resultType="com.yongoe.pure.system.api.vo.SysDictItemVo">
+        select di.*
+        from sys_dict d left join sys_dict_item di on d.dict_id = di.dict_id
+        <where>
+            d.dict_code = #{dictCode}
+        </where>
+        order by di.order_num
+    </select>
+
+</mapper>

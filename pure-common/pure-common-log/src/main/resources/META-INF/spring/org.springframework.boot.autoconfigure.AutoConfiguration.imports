@@ -1,0 +1,3 @@
+com.yongoe.pure.common.log.LogSaveService
+com.yongoe.pure.common.log.SysLogAspect
+com.yongoe.pure.common.log.ThreadPoolConfig

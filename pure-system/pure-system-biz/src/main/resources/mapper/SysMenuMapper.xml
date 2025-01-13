@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysMenuMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysMenuVo">
+        select *
+        from sys_menu
+        <where>
+            del_flag ='0'
+            <if test="null != sysMenu.menuId">
+                and menu_id = #{sysMenu.menuId}
+            </if>
+            <if test="null != sysMenu.parentId">
+                and parent_id = #{sysMenu.parentId}
+            </if>
+            <if test="null != sysMenu.name and ''!=sysMenu.name">
+                and name LIKE CONCAT('%',#{sysMenu.name  },'%')
+            </if>
+            <if test="null != sysMenu.permission and ''!=sysMenu.permission">
+                and permission LIKE CONCAT('%',#{sysMenu.permission  },'%')
+            </if>
+            <if test="null != sysMenu.path and ''!=sysMenu.path">
+                and path LIKE CONCAT('%',#{sysMenu.path  },'%')
+            </if>
+            <if test="null != sysMenu.component and ''!=sysMenu.component">
+                and component LIKE CONCAT('%',#{sysMenu.component  },'%')
+            </if>
+            <if test="null != sysMenu.query and ''!=sysMenu.query">
+                and query LIKE CONCAT('%',#{sysMenu.query  },'%')
+            </if>
+            <if test="null != sysMenu.embedded and ''!=sysMenu.embedded">
+                and embedded LIKE CONCAT('%',#{sysMenu.embedded  },'%')
+            </if>
+            <if test="null != sysMenu.keepAlive and ''!=sysMenu.keepAlive">
+                and keep_alive LIKE CONCAT('%',#{sysMenu.keepAlive  },'%')
+            </if>
+            <if test="null != sysMenu.menuType and ''!=sysMenu.menuType">
+                and menu_type LIKE CONCAT('%',#{sysMenu.menuType  },'%')
+            </if>
+            <if test="null != sysMenu.visible and ''!=sysMenu.visible">
+                and visible LIKE CONCAT('%',#{sysMenu.visible  },'%')
+            </if>
+            <if test="null != sysMenu.status and ''!=sysMenu.status">
+                and status LIKE CONCAT('%',#{sysMenu.status  },'%')
+            </if>
+            <if test="null != sysMenu.icon and ''!=sysMenu.icon">
+                and icon LIKE CONCAT('%',#{sysMenu.icon  },'%')
+            </if>
+            <if test="null != sysMenu.orderNum">
+                and order_num = #{sysMenu.orderNum}
+            </if>
+            <if test="null != sysMenu.remark and ''!=sysMenu.remark">
+                and remark LIKE CONCAT('%',#{sysMenu.remark  },'%')
+            </if>
+            <if test="null != sysMenu.delFlag and ''!=sysMenu.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysMenu.delFlag  },'%')
+            </if>
+            <if test="null != sysMenu.createBy and ''!=sysMenu.createBy">
+                and create_by LIKE CONCAT('%',#{sysMenu.createBy  },'%')
+            </if>
+            <if test="null != sysMenu.createTime">
+                and create_time = #{sysMenu.createTime}
+            </if>
+            <if test="null != sysMenu.updateBy and ''!=sysMenu.updateBy">
+                and update_by LIKE CONCAT('%',#{sysMenu.updateBy  },'%')
+            </if>
+            <if test="null != sysMenu.updateTime">
+                and update_time = #{sysMenu.updateTime}
+            </if>
+        </where>
+        order by order_num
+    </select>
+
+</mapper>

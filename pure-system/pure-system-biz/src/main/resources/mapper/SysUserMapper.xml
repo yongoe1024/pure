@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysUserMapper">
+    <!--SysUserVo 通用查询映射结果-->
+    <resultMap id="BaseResultMap" type="com.yongoe.pure.system.api.vo.UserInfo">
+        <id column="user_id" property="userId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="sex" property="sex"/>
+        <result column="avatar" property="avatar"/>
+        <result column="status" property="status"/>
+        <result column="user_extra_data" property="userExtraData"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result column="remark" property="remark"/>
+        <collection property="posts"
+                    select="selectPostByUserId"
+                    column="user_id">
+        </collection>
+        <collection property="roles"
+                    select="com.yongoe.pure.system.mapper.SysRoleMapper.selectRoleByUserId"
+                    column="user_id">
+        </collection>
+    </resultMap>
+
+    <!--    获取用户岗位-->
+    <select id="selectPostByUserId" resultType="com.yongoe.pure.system.api.vo.SysPostVo">
+        select p.*
+        from sys_user_post up LEFT JOIN sys_post p ON up.post_id = p.post_id and p.del_flag ='0'
+        <where>
+            up.user_id = #{userId}
+        </where>
+    </select>
+
+    <!--    通用sql-->
+    <sql id="getUser">
+        select u.*,
+        d.dept_name
+        from sys_user u left join sys_dept d on u.dept_id = d.dept_id and d.del_flag ='0' and u.del_flag ='0'
+    </sql>
+
+    <select id="getUserInfoByUsername" resultMap="BaseResultMap">
+        <include refid="getUser"/>
+        <where>
+            u.username = #{username}
+        </where>
+    </select>
+
+    <select id="selectByPage" resultMap="BaseResultMap">
+        <include refid="getUser"/>
+        <where>
+            <if test="null != sysUser.userId">
+                and user_id = #{sysUser.userId}
+            </if>
+            <if test="null != sysUser.deptId">
+                and dept_id = #{sysUser.deptId}
+            </if>
+            <if test="null != sysUser.username and ''!=sysUser.username">
+                and username LIKE CONCAT('%',#{sysUser.username  },'%')
+            </if>
+            <if test="null != sysUser.password and ''!=sysUser.password">
+                and password LIKE CONCAT('%',#{sysUser.password  },'%')
+            </if>
+            <if test="null != sysUser.nickname and ''!=sysUser.nickname">
+                and nickname LIKE CONCAT('%',#{sysUser.nickname  },'%')
+            </if>
+            <if test="null != sysUser.name and ''!=sysUser.name">
+                and name LIKE CONCAT('%',#{sysUser.name  },'%')
+            </if>
+            <if test="null != sysUser.email and ''!=sysUser.email">
+                and email LIKE CONCAT('%',#{sysUser.email  },'%')
+            </if>
+            <if test="null != sysUser.phone and ''!=sysUser.phone">
+                and phone LIKE CONCAT('%',#{sysUser.phone  },'%')
+            </if>
+            <if test="null != sysUser.sex and ''!=sysUser.sex">
+                and sex LIKE CONCAT('%',#{sysUser.sex  },'%')
+            </if>
+            <if test="null != sysUser.avatar and ''!=sysUser.avatar">
+                and avatar LIKE CONCAT('%',#{sysUser.avatar  },'%')
+            </if>
+            <if test="null != sysUser.status and ''!=sysUser.status">
+                and status LIKE CONCAT('%',#{sysUser.status  },'%')
+            </if>
+            <if test="null != sysUser.remark and ''!=sysUser.remark">
+                and remark LIKE CONCAT('%',#{sysUser.remark  },'%')
+            </if>
+            <if test="null != sysUser.delFlag and ''!=sysUser.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysUser.delFlag  },'%')
+            </if>
+            <if test="null != sysUser.createBy and ''!=sysUser.createBy">
+                and create_by LIKE CONCAT('%',#{sysUser.createBy  },'%')
+            </if>
+            <if test="null != sysUser.createTime">
+                and create_time = #{sysUser.createTime}
+            </if>
+            <if test="null != sysUser.updateBy and ''!=sysUser.updateBy">
+                and update_by LIKE CONCAT('%',#{sysUser.updateBy  },'%')
+            </if>
+            <if test="null != sysUser.updateTime">
+                and update_time = #{sysUser.updateTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMenu" resultType="com.yongoe.pure.system.api.vo.SysMenuVo">
+        SELECT distinct m.*
+        FROM sys_user_role ur
+        LEFT JOIN sys_role_menu rm ON ur.role_id = rm.role_id
+        LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+        WHERE
+        m.del_flag = '0' and m.status = 1
+
+        and ur.user_id = #{userId}
+        order by m.order_num desc
+    </select>
+
+    <select id="getMenuByAdmin" resultType="com.yongoe.pure.system.api.vo.SysMenuVo">
+        SELECT distinct m.*
+        FROM sys_menu m
+        <where>
+            m.del_flag = '0' and m.status = 1
+            order by m.order_num desc
+        </where>
+
+    </select>
+
+</mapper>

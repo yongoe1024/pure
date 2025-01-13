@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yongoe.pure.system.mapper.SysDictItemMapper">
+
+    <!--    获取分页数据-->
+    <select id="selectByPage" resultType="com.yongoe.pure.system.api.vo.SysDictItemVo">
+        select *
+        from sys_dict_item
+        <where>
+            del_flag ='0'
+            <if test="null != sysDictItem.id">
+                and id = #{sysDictItem.id}
+            </if>
+            <if test="null != sysDictItem.dictId">
+                and dict_id = #{sysDictItem.dictId}
+            </if>
+            <if test="null != sysDictItem.dictLabel and ''!=sysDictItem.dictLabel">
+                and dict_label LIKE CONCAT('%',#{sysDictItem.dictLabel  },'%')
+            </if>
+            <if test="null != sysDictItem.dictValue and ''!=sysDictItem.dictValue">
+                and dict_value LIKE CONCAT('%',#{sysDictItem.dictValue  },'%')
+            </if>
+            <if test="null != sysDictItem.style and ''!=sysDictItem.style">
+                and style LIKE CONCAT('%',#{sysDictItem.style  },'%')
+            </if>
+            <if test="null != sysDictItem.orderNum">
+                and order_num = #{sysDictItem.orderNum}
+            </if>
+            <if test="null != sysDictItem.remark and ''!=sysDictItem.remark">
+                and remark LIKE CONCAT('%',#{sysDictItem.remark  },'%')
+            </if>
+            <if test="null != sysDictItem.delFlag and ''!=sysDictItem.delFlag">
+                and del_flag LIKE CONCAT('%',#{sysDictItem.delFlag  },'%')
+            </if>
+            <if test="null != sysDictItem.createBy and ''!=sysDictItem.createBy">
+                and create_by LIKE CONCAT('%',#{sysDictItem.createBy  },'%')
+            </if>
+            <if test="null != sysDictItem.createTime">
+                and create_time = #{sysDictItem.createTime}
+            </if>
+            <if test="null != sysDictItem.updateBy and ''!=sysDictItem.updateBy">
+                and update_by LIKE CONCAT('%',#{sysDictItem.updateBy  },'%')
+            </if>
+            <if test="null != sysDictItem.updateTime">
+                and update_time = #{sysDictItem.updateTime}
+            </if>
+        </where>
+        order by order_num
+    </select>
+
+</mapper>

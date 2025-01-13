@@ -1,0 +1,44 @@
+server:
+  port: 8300
+
+spring:
+  application:
+    name: @artifactId@
+  cloud:
+    nacos:
+      username: @nacos.username@
+      password: @nacos.password@
+      discovery:
+        server-addr: @nacos.addr@
+        namespace: @nacos.namespace@
+        group: @nacos.group@
+      config:
+        server-addr: @nacos.addr@
+        namespace: @nacos.namespace@
+        group: @nacos.group@
+  config:
+    import:
+      - nacos:${spring.application.name}.yml
+      - nacos:application.yml
+      - nacos:sa-token.yml
+      - nacos:redis.yml
+      - nacos:datasource.yml
+
+
+# 预设定--目标模块信息，提供前端页面配置
+gen:
+  is-cover: true
+  url: jdbc:mysql://localhost:3306/pure
+  username: root
+  password: 123456
+  author: pure
+  root-path: /Users/yongoe/code/github/pure/pure-ui
+  ui-src-path: /Users/yongoe/code/github/pure/pure-ui/src
+  module:
+    - module-name: emp
+      package-name: com.yongoe.pure.emp
+      maven-module-name: pure-emp
+      gen-module-type: single
+
+
+
