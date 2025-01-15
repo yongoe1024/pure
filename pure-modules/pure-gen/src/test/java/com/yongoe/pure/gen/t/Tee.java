@@ -23,11 +23,17 @@ public class Tee {
     public void removeTable() {
     }
 
+    /**
+     * 添加表
+     */
     @Test
     public void addTable() {
         genTableService.addTable("sys_user", "用户表");
     }
 
+    /**
+     * 生成模块结构
+     */
     @Test
     public void addModule() {
         MavenModule build = MavenModule.builder()
@@ -42,6 +48,9 @@ public class Tee {
         GenModuleService.gen(build);
     }
 
+    /**
+     * 生成代码
+     */
     @Test
     public void genCode() {
         genTableService.gen(1L);

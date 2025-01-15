@@ -4,7 +4,7 @@ import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import com.yongoe.pure.common.core.entity.R;
 import com.yongoe.pure.common.core.utils.SpringContextHolder;
-import com.yongoe.pure.system.api.feign.RemoteUserService;
+import com.yongoe.pure.system.api.feign.RemoteSystemService;
 import com.yongoe.pure.system.api.vo.UserInfo;
 
 /**
@@ -46,7 +46,7 @@ public class UserUtils {
      */
     public static void updateUserInfoByUsername(String username) {
         if (StpUtil.isLogin(username)) {
-            RemoteUserService service = SpringContextHolder.getBean(RemoteUserService.class);
+            RemoteSystemService service = SpringContextHolder.getBean(RemoteSystemService.class);
             R<UserInfo> userInfo = service.getUserInfo(username);
             SaSession session = StpUtil.getSessionByLoginId(username);
             String token = session.getToken();

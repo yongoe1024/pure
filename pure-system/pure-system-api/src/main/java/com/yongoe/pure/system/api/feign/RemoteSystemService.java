@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Map;
-
 /**
  * 用户模块feign接口
  *
@@ -34,5 +32,12 @@ public interface RemoteSystemService {
      */
     @PostMapping("/login")
     R<String> login(@RequestBody LoginDto dto);
+
+    /**
+     * 通过用户名查询用户信息
+     */
+    @GetMapping("/user/getUserInfo")
+    R<UserInfo> getUserInfo(@RequestParam String username);
+
 
 }
