@@ -1,4 +1,4 @@
-package com.yongoe.pure.common.core.redis;
+package com.yongoe.pure.common.core.utils;
 
 import jakarta.annotation.Resource;
 import org.springframework.data.redis.core.BoundSetOperations;

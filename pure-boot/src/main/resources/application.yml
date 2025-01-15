@@ -5,7 +5,7 @@ server:
 
 spring:
   main:
-#    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: true # 允许satoken的bean覆盖
   cloud:
     nacos:
       discovery:

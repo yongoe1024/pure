@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ThreadLocal线程工具
+ * 数据权限ThreadLocal工具
  *
  * @author yongoe
  * @since 2023/1/1

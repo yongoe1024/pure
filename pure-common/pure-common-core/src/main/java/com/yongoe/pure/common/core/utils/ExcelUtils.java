@@ -22,7 +22,8 @@ import java.util.UUID;
 public class ExcelUtils {
 
     /**
-     * 导入excel不安全 --一次性读到list中，容易造成内存溢出
+     * 导入excel
+     * 不安全，一次性读到list中，容易造成内存溢出
      *
      * @param file      文件流
      * @param classname 实体类名

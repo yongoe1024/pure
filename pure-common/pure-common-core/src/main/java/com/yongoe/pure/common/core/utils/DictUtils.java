@@ -15,9 +15,7 @@ import java.util.Map;
 public class DictUtils {
 
     /**
-     * 获取数据字典项
-     *
-     * @param dictCode 数据字典编码
+     * 根据字典编码，获取数据字典项
      */
     public static List<Map<String, Object>> getItem(String dictCode) {
         CacheManager cacheManager = SpringContextHolder.getBean(CacheManager.class);
@@ -27,7 +25,7 @@ public class DictUtils {
     }
 
     /**
-     * 获取数据字典项的value
+     * 根据lable，获取数据字典项的value
      */
     public static String getValue(String dictCode, String dictLable) {
         List<Map<String, Object>> list = getItem(dictCode);
@@ -40,7 +38,7 @@ public class DictUtils {
     }
 
     /**
-     * 获取数据字典项的lable
+     * 根据value，获取数据字典项的lable
      */
     public static String getLable(String dictCode, String dictValue) {
         List<Map<String, Object>> list = getItem(dictCode);
