@@ -5,8 +5,7 @@ server:
 
 spring:
   main:
-    allow-bean-definition-overriding: true
-
+#    allow-bean-definition-overriding: true
   cloud:
     nacos:
       discovery:

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * 用户模块feign接口
+ * feign接口
  *
  * @author yongoe
  * @since 2024/07/04

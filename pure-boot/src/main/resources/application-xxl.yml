@@ -1,0 +1,11 @@
+xxl:
+  job:
+    accessToken: default_token  # 默认令牌
+    admin:
+      addresses: http://127.0.0.1:8400/xxl-job-admin
+    executor:
+      appname: pure-job  # 执行器AppName，必须和xxl-job-admin中新建任务时填写的AppName一致
+      #ip:  默认自动获取，若设备网卡复杂，可配置固定ip
+      port: 9999
+      logpath: logs/${project.artifactId}/${xxl.job.executor.appname}
+      logretentiondays: 30  # 日志保存天数，默认30天

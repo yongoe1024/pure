@@ -2,6 +2,28 @@ server:
   port: 8500
 
 spring:
+  profiles:
+    active: cloud
+
+---
+spring:
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+      config:
+        enabled: false
+  config:
+    activate:
+      on-profile: boot
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/pure
+
+---
+spring:
   application:
     name: @artifactId@
   cloud:
@@ -18,5 +40,11 @@ spring:
         group: @nacos.group@
   config:
     import:
-      - nacos:xxl-job-admin.properties
-      - nacos:datasource.yml
+      - nacos:${spring.application.name}.yml
+    activate:
+      on-profile: cloud
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/pure
