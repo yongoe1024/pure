@@ -8,6 +8,8 @@ import cn.dev33.satoken.util.SaResult;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Map;
+
 /**
  * [Sa-Token 权限认证] 配置类
  *
@@ -25,9 +27,10 @@ public class SaTokenConfigure {
         saReactorFilter.setAuth(obj -> SaRouter.match("/**", r -> StpUtil.checkLogin()));
         saReactorFilter.setError(e -> {
             if (e instanceof NotLoginException) {
-                return new SaResult(401, e.getMessage(), null);
+                return Map.of("code", 401, "message", "未登录");
             } else {
-                return new SaResult(500, e.getMessage(), null);
+                return Map.of("code", 500, "message", e.getMessage());
+
             }
         });
         return saReactorFilter;

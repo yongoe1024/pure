@@ -5,7 +5,7 @@ import com.yongoe.pure.common.core.entity.R;
 import com.yongoe.pure.common.log.Log;
 import com.yongoe.pure.system.api.dto.LoginDto;
 import com.yongoe.pure.system.api.dto.RegisterDto;
-import com.yongoe.pure.system.api.feign.RemoteLoginService;
+import com.yongoe.pure.system.api.feign.RemoteSystemService;
 import jakarta.annotation.Resource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 public class LoginController {
     @Resource
-    RemoteLoginService service;
+    RemoteSystemService service;
 
-    @Log(spel = "'登录' + #login.getUsername()")
+    @Log(spel = "'登录-' + #login.getUsername()")
     @PostMapping("/login")
     public R loginPC(@Validated @RequestBody LoginDto login) {
         return service.login(login);
@@ -35,7 +35,7 @@ public class LoginController {
         return R.success("退出登录");
     }
 
-    @Log(spel = "'注册' + #register.getUsername()")
+    @Log(spel = "'注册-' + #register.getUsername()")
     @PostMapping("/register")
     public R register(@Validated @RequestBody RegisterDto register) {
         return service.register(register);

@@ -19,8 +19,8 @@ import java.util.Map;
  * @author yongoe
  * @since 2024/07/04
  */
-@FeignClient(contextId = "RemoteUserService", name = ServiceName.PURE_SYSTEM_BIZ,path = "/system")
-public interface RemoteLoginService {
+@FeignClient(contextId = "RemoteSystemService", name = ServiceName.PURE_SYSTEM_BIZ,path = "/system")
+public interface RemoteSystemService {
 
     /**
      * 注册用户信息

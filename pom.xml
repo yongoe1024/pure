@@ -218,7 +218,7 @@
                     <source>${maven.compiler.source}</source>
                     <encoding>UTF-8</encoding>
                     <compilerArgs>
-                        <!--   保留法参数名信息-->
+                        <!--   保留参数名信息,反射用-->
                         <arg>-parameters</arg>
                     </compilerArgs>
                     <annotationProcessorPaths>
@@ -237,7 +237,7 @@
                             <artifactId>lombok-mapstruct-binding</artifactId>
                             <version>${lombok-mapstruct-binding.version}</version>
                         </path>
-                        <!--                        生成yml自定义参数 -->
+                        <!--                        生成yml自定义参数配置文件，yml可以自动补全 -->
                         <!--                        <path>-->
                         <!--                            <groupId>org.springframework.boot</groupId>-->
                         <!--                            <artifactId>spring-boot-configuration-processor</artifactId>-->
@@ -256,7 +256,7 @@
                     <executions>
                         <execution>
                             <goals>
-                                <!--为了spring-boot-maven-plugin打包正常-->
+                                <!--重打包配置，为了spring-boot-maven-plugin打包正常-->
                                 <goal>repackage</goal>
                             </goals>
                         </execution>
@@ -276,7 +276,6 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <nacos.active>dev</nacos.active>
                 <nacos.username>nacos</nacos.username>
                 <nacos.password>nacos</nacos.password>
                 <nacos.addr>127.0.0.1:8848</nacos.addr>

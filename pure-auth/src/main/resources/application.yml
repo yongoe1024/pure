@@ -18,20 +18,7 @@ spring:
         group: @nacos.group@
   config:
     import:
+      # 需要 satoken、redis、数据库
       - nacos:${spring.application.name}.yml
       - nacos:application.yml
-      - nacos:sa-token.yml
-      - nacos:redis.yml
-      - nacos:datasource.yml
 
-captcha:
-  expire:
-    default: 10000
-    # 文字点选验证码 过期时间设置大一点
-    WORD_IMAGE_CLICK: 60000
-  secondary:
-    enabled: false
-  # 初始化默认模板文件
-  init-default-resource: true
-  local-cache-enabled: true
-  local-cache-size: 20

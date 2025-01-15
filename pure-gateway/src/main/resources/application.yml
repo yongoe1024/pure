@@ -19,6 +19,5 @@ spring:
   config:
     import:
       - nacos:${spring.application.name}.yml
-      - nacos:sa-token.yml
 
 
