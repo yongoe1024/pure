@@ -1,7 +1,7 @@
 package com.yongoe.pure.gen.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.yongoe.pure.gen.constant. GenConstant;
+import com.yongoe.pure.gen.constant.GenConstant;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -26,10 +26,10 @@ public class GenTableColumn {
                 .isRequired(GenConstant.YES)
                 .isInsert(GenConstant.YES)
                 .isEdit(GenConstant.YES)
-                .isList( GenConstant.YES)
-                .isQuery( GenConstant.YES)
-                .queryType( GenConstant.EQ)
-                .htmlType( GenConstant.input)
+                .isList(GenConstant.YES)
+                .isQuery(GenConstant.YES)
+                .queryType(GenConstant.EQ)
+                .htmlType(GenConstant.input)
                 .sort(1)
                 .build();
     }

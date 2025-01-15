@@ -32,16 +32,7 @@ public class GenTableController {
     private GenTableColumnService genTableColumnService;
 
     /**
-     * 获取列表
-     */
-    @GetMapping("/page")
-    public R page(GenTable entity) {
-        Page<GenTable> page = genTableService.selectByPage(PageUtils.getPage(), entity);
-        return R.success(null, new PageUtils(page));
-    }
-
-    /**
-     * 获取 table列表
+     * 获取数据库表
      */
     @GetMapping("/queryTable")
     public R queryTable() {
@@ -50,7 +41,16 @@ public class GenTableController {
     }
 
     /**
-     * 获取表字段
+     * 获取生成项列表
+     */
+    @GetMapping("/page")
+    public R page(GenTable entity) {
+        Page<GenTable> page = genTableService.selectByPage(PageUtils.getPage(), entity);
+        return R.success(null, new PageUtils(page));
+    }
+
+    /**
+     * 获取详细信息
      */
     @GetMapping("/columnList")
     public R columnList(Long tableId) {
@@ -62,7 +62,7 @@ public class GenTableController {
     }
 
     /**
-     * 新增表
+     * 新增生成项
      */
     @PostMapping("/addTable")
     public R addTable(String tableName, String tableComment) {
@@ -71,25 +71,16 @@ public class GenTableController {
     }
 
     /**
-     * 新增maven模块
-     */
-    @PostMapping("/addModule")
-    public R addMavenModule(@Validated @RequestBody MavenModule pomModule) {
-        genTableService.addMavenModule(pomModule);
-        return R.success("生成结束，请查看控制台日志");
-    }
-
-    /**
-     * 修改表信息
+     * 修改生成项
      */
     @PostMapping("/updateTable")
     public R updateTable(@Validated @RequestBody GenTable entity) {
         genTableService.updateById(entity);
-        return R.success("修改表信息成功");
+        return R.success("修改成功");
     }
 
     /**
-     * 修改表字段
+     * 修改详细信息
      */
     @PostMapping("/updateColumn")
     public R updateColumn(@Validated @RequestBody List<GenTableColumn> columnList) {
@@ -103,6 +94,16 @@ public class GenTableController {
     @PostMapping("/gen")
     public R genCodeToAuto(Long tableId) {
         genTableService.gen(tableId);
+        return R.success("生成结束，请查看控制台日志");
+    }
+
+
+    /**
+     * 生成maven模块结构
+     */
+    @PostMapping("/addModule")
+    public R addMavenModule(@Validated @RequestBody MavenModule pomModule) {
+        genTableService.addMavenModule(pomModule);
         return R.success("生成结束，请查看控制台日志");
     }
 

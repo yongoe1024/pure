@@ -20,10 +20,6 @@ spring:
     import:
       - nacos:${spring.application.name}.yml
       - nacos:application.yml
-      - nacos:sa-token.yml
-      - nacos:redis.yml
-      - nacos:datasource.yml
-
 
 # 预设定--目标模块信息，提供前端页面配置
 gen:
@@ -34,7 +30,7 @@ gen:
   author: pure
   root-path: /Users/yongoe/code/github/pure/pure-ui
   ui-src-path: /Users/yongoe/code/github/pure/pure-ui/src
-  module:
+  module: # 预置模块信息，提供前端下拉框选择的，省事
     - module-name: emp
       package-name: com.yongoe.pure.emp
       maven-module-name: pure-emp

@@ -52,7 +52,7 @@ public interface GenConstant {
     /**
      * 生成项目结构
      */
-    String single = "single";
-    String multiple = "multiple";
+    String single = "single";  // 单模块
+    String multiple = "multiple";  // 多模块
 
 }

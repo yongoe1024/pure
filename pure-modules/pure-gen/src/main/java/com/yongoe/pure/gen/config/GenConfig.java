@@ -21,29 +21,50 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "gen")
 public class GenConfig {
-
+    /**
+     * 是否覆盖已存在的文件
+     */
     private Boolean isCover;
-
+    /**
+     * 数据库连接url
+     */
     private String url;
-
+    /**
+     * 数据库用户名
+     */
     private String username;
-
+    /**
+     * 数据库密码
+     */
     private String password;
-
+    /**
+     * 作者
+     */
     private String author;
-
+    /**
+     * 生成根路径
+     */
     private String rootPath;
-
+    /**
+     * 前端生成根路径
+     */
     private String uiSrcPath;
 
+    /**
+     * 生成目标模块预置信息
+     */
     private MavenModuleConfig[] module;
 
+    /**
+     * 启动初始化
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void handleApplicationReadyEvent(ApplicationReadyEvent event) {
         GenCodeService.rootPath = rootPath;
         GenCodeService.uiSrcPath = uiSrcPath;
         GenModuleService.rootPath = rootPath;
         GenUtils.isCover = isCover;
+        // 校验配置，断言
         assert StringUtils.isNotBlank(url);
         assert StringUtils.isNotBlank(username);
         assert StringUtils.isNotBlank(password);
@@ -51,11 +72,12 @@ public class GenConfig {
         assert StringUtils.isNotBlank(rootPath);
         assert StringUtils.isNotBlank(uiSrcPath);
         assert module != null;
-        for (MavenModuleConfig pomModuleConfig : module) {
-            String moduleName = pomModuleConfig.getModuleName();
-            String packageName = pomModuleConfig.getPackageName();
-            String mavenModuleName = pomModuleConfig.getMavenModuleName();
-            String genModuleType = pomModuleConfig.getGenModuleType();
+        for (MavenModuleConfig item : module) {
+            String moduleName = item.getModuleName();
+            String packageName = item.getPackageName();
+            String mavenModuleName = item.getMavenModuleName();
+            String genModuleType = item.getGenModuleType();
+            // 断言
             assert StringUtils.isNotBlank(moduleName);
             assert StringUtils.isNotBlank(packageName);
             assert StringUtils.isNotBlank(mavenModuleName);
