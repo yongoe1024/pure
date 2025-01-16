@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Import;
  * @author yongoe
  * @since 2024/7/4
  */
-@ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {com.yongoe.pure.common.security.SaTokenConfigure.class})})
 @EnableFeignClients(basePackages = {"com.yongoe.pure"})
 @Import(PureFeignClientsRegistrar.class)
 @SpringBootApplication(scanBasePackages = {"com.yongoe.pure"})
